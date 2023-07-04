@@ -1,7 +1,8 @@
 import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { getValidSessionByToken } from '../../database/sessions';
-import CommentForm from './comments/CommentForm';
+import { getUserBySessionToken } from '../../database/users';
+// import CommentForm from './comments/CommentForm';
 import CreatePostForm from './posts/CreatePostForm';
 
 export default async function ActivityPage() {
@@ -17,12 +18,19 @@ export default async function ActivityPage() {
   // 3. Either redirect or render the login form
   if (!session) redirect('/?returnTo=/activity');
 
+  const user = await getUserBySessionToken(session.token);
+  console.log(user);
+
+  if (!user) {
+    notFound();
+  }
+
   return (
     <main>
       <h1>This is activity page</h1>
       <h4>Post or comment here</h4>
       {/* <CommentForm /> */}
-      <CreatePostForm />
+      <CreatePostForm userId={user.id} />
     </main>
   );
 }
