@@ -1,4 +1,5 @@
 'use client';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 type Props = {
@@ -15,6 +16,7 @@ export default function ProfileForm({ user }: Props) {
   const [lastnameInput, setLastnameInput] = useState(user.lastname);
   const [usernameInput, setUsernameInput] = useState(user.username);
   const [onEditId, setOnEditId] = useState<number>();
+  const router = useRouter();
 
   // only for on edit inputs
   const [onEditFirstnameInput, setOnEditFirstnameInput] = useState('');
@@ -30,7 +32,7 @@ export default function ProfileForm({ user }: Props) {
         username: onEditUsernameInput,
       }),
     });
-
+    router.refresh();
     const data = await response.json();
 
     console.log(data.user);
@@ -40,7 +42,7 @@ export default function ProfileForm({ user }: Props) {
   }
 
   return (
-    <div>
+    <form onSubmit={(event) => event.preventDefault()}>
       <label>
         First Name
         <input
@@ -93,6 +95,6 @@ export default function ProfileForm({ user }: Props) {
           edit
         </button>
       )}
-    </div>
+    </form>
   );
 }
