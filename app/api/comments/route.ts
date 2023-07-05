@@ -1,7 +1,9 @@
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import { createComment, getAllComments } from '../../../database/comments';
 import { getUserBySessionToken } from '../../../database/users';
+import { Comment } from '../../../migrations/1688562116-createTableComments';
 
 export type Error = {
   error: string;
@@ -57,15 +59,15 @@ export async function GET(
   // }
 
   // query the database to get all the animals only if a valid session token is passed
-  // const posts = await getPostsWithLimitAndOffsetBySessionToken(
+  // const comments = await getPostsWithLimitAndOffsetBySessionToken(
   //   limit,
   //   offset,
   //   sessionTokenCookie.value,
   // );
 
   // call db and get the posts
-  // const getComments = await getAllPosts();
-  console.log('here', comments);
+  const getComments = await getAllComments();
+  // console.log('here', comments);
 
   return NextResponse.json({ comments: getComments });
 }
