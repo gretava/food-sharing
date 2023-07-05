@@ -10,7 +10,7 @@ export const createPost = cache(async (userId: number, content: string) => {
       (${userId}, ${content}) -- deleted session
     RETURNING
       id,
-      userId,
+      user_id,
       content
       -- createdAt
       -- session
