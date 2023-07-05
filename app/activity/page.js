@@ -3,6 +3,7 @@ import { notFound, redirect } from 'next/navigation';
 import { getAllPosts } from '../../database/posts';
 import { getValidSessionByToken } from '../../database/sessions';
 import { getUserBySessionToken } from '../../database/users';
+import CreateCommentForm from './comments/CreateCommentForm';
 // import CommentForm from './comments/CommentForm';
 import CreatePostForm from './posts/CreatePostForm';
 
@@ -35,7 +36,9 @@ export default async function ActivityPage() {
       <CreatePostForm userId={user.id} />
       {/* {JSON.stringify(posts)} */}
       {posts.map((post) => (
-        <div key={`post-content-${post.id}`}>{post.content}</div>
+        <div key={`post-content-${post.id}`}>
+          {post.content} <CreateCommentForm />
+        </div>
       ))}
     </main>
   );
