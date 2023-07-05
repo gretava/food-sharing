@@ -41,6 +41,7 @@ export default function CreatePostForm({ userId, posts }: Props) {
           value={postContent}
           onChange={(event) => setPostContent(event.currentTarget.value)}
           placeholder="Say something..."
+          required
         />
         <button onClick={async () => await createPost()}>Post</button>
       </div>
