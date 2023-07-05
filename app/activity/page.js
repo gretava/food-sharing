@@ -1,5 +1,6 @@
 import { cookies } from 'next/headers';
 import { notFound, redirect } from 'next/navigation';
+import { getAllPosts } from '../../database/posts';
 import { getValidSessionByToken } from '../../database/sessions';
 import { getUserBySessionToken } from '../../database/users';
 // import CommentForm from './comments/CommentForm';
@@ -25,12 +26,17 @@ export default async function ActivityPage() {
     notFound();
   }
 
+  const posts = await getAllPosts();
+  console.log(posts);
   return (
     <main>
       <h1>This is activity page</h1>
       <h4>Post or comment here</h4>
-      {/* <CommentForm /> */}
       <CreatePostForm userId={user.id} />
+      {/* {JSON.stringify(posts)} */}
+      {posts.map((post) => (
+        <div key={`post-content-${post.id}`}>{post.content}</div>
+      ))}
     </main>
   );
 }
