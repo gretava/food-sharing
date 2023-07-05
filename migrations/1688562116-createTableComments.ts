@@ -5,7 +5,7 @@ export type Comment = {
   post_id: number;
   user_id: number;
   content: string;
-  created_at: string;
+  created_at: Date;
 };
 
 export async function up(sql: Sql) {
