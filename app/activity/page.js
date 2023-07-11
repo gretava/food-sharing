@@ -1,12 +1,22 @@
 import { cookies } from 'next/headers';
+import Image from 'next/image';
 import { notFound, redirect } from 'next/navigation';
-import { getAllComments } from '../../database/comments';
-import { getAllPosts } from '../../database/posts';
+import {
+  getAllComments,
+  getAllCommentsWithUserInfo,
+  getCommentsByPostId,
+} from '../../database/comments';
+import {
+  getAllPosts,
+  getAllPostsWithUserInfo,
+  getCommentsWithUserInfo,
+} from '../../database/posts';
 import { getValidSessionByToken } from '../../database/sessions';
 import { getUserBySessionToken } from '../../database/users';
 import CreateCommentForm from './comments/CreateCommentForm';
-// import CommentForm from './comments/CommentForm';
+import styles from './page.module.scss';
 import CreatePostForm from './posts/CreatePostForm';
+import { DeletePostButton } from './posts/DeletePostButton';
 
 export default async function ActivityPage() {
   // 1. Check if the sessionToken cookie exit
@@ -30,27 +40,43 @@ export default async function ActivityPage() {
 
   const posts = await getAllPosts();
   const comments = await getAllComments();
-  console.log(posts);
+  const userPostsWithInfo = await getAllPostsWithUserInfo();
+  const commentsWithInfo = await getAllCommentsWithUserInfo();
+  // const commentsByPostId = await getCommentsByPostId();
+  console.log(userPostsWithInfo);
+  console.log(commentsWithInfo);
+
   return (
-    <main>
+    <main className={styles.backgroundFeed}>
       <h1>This is activity page</h1>
       <h4>Post or comment here</h4>
-      {JSON.stringify(comments)}
-      <CreatePostForm userId={user.id} />
-      {posts.map((post) => (
-        <div key={`post-content-${post.id}`}>
-          {post.content}
-          {/* <div> */}
-          {/* {comments.map((comment) => (
-            <div key={`comment-content-${comment.id}`}>
-              <CreateCommentForm postId={post.id} userId={user.id} />
-            </div>
-          ))} */}
-          {/* </div> */}
+      <section>
+        <CreatePostForm userId={user.id} className={styles.postInputField} />
 
-          <CreateCommentForm postId={post.id} userId={user.id} />
-        </div>
-      ))}
+        {/* display all posts with user info */}
+        {userPostsWithInfo.map((post) => (
+          <div key={`post-content-${post.postId}`}>
+            <div>{post.username}</div>
+            <div>{post.content}</div>
+            {post.imageUrl === '' ? null : (
+              <Image src={post.imageUrl} alt="" width={200} height={200} />
+            )}
+            <DeletePostButton postId={post.postId} />
+
+            {/* filter the comments based on postID and then map it over to display comments with user info */}
+            {commentsWithInfo
+              .filter((comment) => comment.postId === post.postId)
+              .map((comment) => (
+                <li key={`comment-content-${comment.id}`}>
+                  <div>{comment.username}</div>
+                  <div>{comment.content} </div>
+                </li>
+              ))}
+
+            <CreateCommentForm postId={post.postId} userId={user.id} />
+          </div>
+        ))}
+      </section>
     </main>
   );
 }
