@@ -26,6 +26,8 @@ export default function CreateCommentForm({ postId, userId, comments }: Props) {
 
     const data = await response.json();
     console.log(data);
+
+    setCommentContent('');
   }
 
   return (
