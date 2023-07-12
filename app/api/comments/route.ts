@@ -1,7 +1,11 @@
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { createComment, getAllComments } from '../../../database/comments';
+import {
+  createComment,
+  getAllComments,
+  getCommentsByPostId,
+} from '../../../database/comments';
 import { getUserBySessionToken } from '../../../database/users';
 import { Comment } from '../../../migrations/1688562116-createTableComments';
 
@@ -67,9 +71,12 @@ export async function GET(
 
   // call db and get the posts
   const getComments = await getAllComments();
+  // const commentsByPostId = await getCommentsByPostId();
+
   // console.log('here', comments);
 
   return NextResponse.json({ comments: getComments });
+  // return NextResponse.json({ comments: commentsByPostId });
 }
 
 export async function POST(

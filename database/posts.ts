@@ -2,22 +2,25 @@ import { cache } from 'react';
 import { Post } from '../migrations/1688030244-createTablePosts';
 import { sql } from './connect';
 
-export const createPost = cache(async (userId: number, content: string) => {
-  const [post] = await sql<Post[]>`
+export const createPost = cache(
+  async (userId: number, content: string, imageUrl: string) => {
+    const [post] = await sql<Post[]>`
     INSERT INTO posts
-      (user_id, content) -- deleted session
+      (user_id, content, image_url) -- deleted session
     VALUES
-      (${userId}, ${content}) -- deleted session
+      (${userId}, ${content}, ${imageUrl}) -- deleted session
     RETURNING
       id,
       user_id,
-      content
+      content,
+      image_url
       -- createdAt
       -- session
  `;
 
-  return post;
-});
+    return post;
+  },
+);
 
 export const getPostById = cache(async (id: number) => {
   const [post] = await sql<Post[]>`
@@ -67,3 +70,32 @@ export const getPostsWithLimitAndOffsetBySessionToken = cache(
     return posts;
   },
 );
+
+export const deletePostById = cache(async (id: number) => {
+  const [post] = await sql<Post[]>`
+    DELETE FROM
+      posts
+    WHERE
+      id = ${id}
+    RETURNING
+      *
+  `;
+  return post;
+});
+
+export const getAllPostsWithUserInfo = cache(async () => {
+  const postsFromUser = await sql<PostsFromUsers[]>`
+  SELECT
+    posts.id AS post_id,
+    users.id AS user_id,
+    users.username AS username,
+    posts.content AS content,
+    posts.image_url AS image_url
+    -- users.image_url AS user_image_url
+  FROM
+    posts
+  INNER JOIN
+    users ON posts.user_id = users.id
+  `;
+  return postsFromUser;
+});

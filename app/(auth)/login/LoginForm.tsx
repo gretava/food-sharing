@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { getSafeReturnToPath } from '../../../util/validation';
 import { LoginResponseBodyPost } from '../../api/(auth)/login/route';
+import styles from './loginForm.module.scss';
 
 type Props = { returnTo?: string | string[] };
 
@@ -38,23 +39,43 @@ export default function LoginForm(props: Props) {
   }
 
   return (
-    <form onSubmit={(event) => event.preventDefault()}>
-      <label>
-        Username:
-        <input
-          value={username}
-          onChange={(event) => setUsername(event.currentTarget.value)}
-        />
-      </label>
-      <label>
-        Password:
-        <input
-          value={password}
-          onChange={(event) => setPassword(event.currentTarget.value)}
-        />
-      </label>
-      <button onClick={async () => await login()}>Log in</button>
-      {error !== '' && <div>{error}</div>}
-    </form>
+    <main className={styles.backroundArea}>
+      {/* <section className={styles.section}> */}
+      <div className={styles.loginText}>
+        <h2 className={styles.h}>Login</h2>
+        <p className={styles.p}>Please login to continue</p>
+      </div>
+      <form onSubmit={(event) => event.preventDefault()}>
+        <div className={styles.loginArea}>
+          <label>
+            username
+            <input
+              className={styles.input}
+              value={username}
+              onChange={(event) => setUsername(event.currentTarget.value)}
+            />
+          </label>
+          <br />
+          <label>
+            password
+            <input
+              className={styles.input}
+              type="password"
+              value={password}
+              onChange={(event) => setPassword(event.currentTarget.value)}
+            />
+          </label>
+        </div>
+        <section className={styles.loginBtnForm}>
+          {/* <div className={styles.loginBtn}> */}
+          <button className={styles.btn} onClick={async () => await login()}>
+            login
+          </button>
+          {/* </div> */}
+          {error !== '' && <div>{error}</div>}
+        </section>
+        {/* </section> */}
+      </form>
+    </main>
   );
 }

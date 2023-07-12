@@ -42,6 +42,7 @@ export const getUserByUsername = cache(async (username: string) => {
       firstname,
       lastname,
       username
+      -- bio,
       -- profile_img_url
     FROM
       users
@@ -57,6 +58,7 @@ export const createUser = cache(
     firstname: string,
     lastname: string,
     username: string,
+    // bio: string,
     // profileImgUrl: string,
     passwordHash: string,
   ) => {
@@ -71,7 +73,6 @@ export const createUser = cache(
       firstname,
       lastname,
       username
-      -- profile_img_url
  `;
 
     return user;
@@ -91,13 +92,23 @@ export const getUserById = cache(async (id: number) => {
 });
 
 export const updateUserById = cache(
-  async (id: number, firstname: string, lastname: string, username: string) => {
+  async (
+    id: number,
+    firstname: string,
+    lastname: string,
+    username: string,
+    bio: string,
+    profileImgUrl: string,
+  ) => {
     const [user] = await sql<User[]>`
       UPDATE users
       SET
         firstname = ${firstname},
         lastname = ${lastname},
-        username = ${username}
+        username = ${username},
+        bio = ${bio},
+        profile_img_url = ${profileImgUrl}
+
       WHERE
         id = ${id}
         RETURNING *
@@ -124,7 +135,9 @@ export const getUserBySessionToken = cache(async (token: string) => {
     users.id,
     users.username,
     users.firstname,
-    users.lastname
+    users.lastname,
+    users.bio,
+    users.profile_img_url
   FROM
     users
   INNER JOIN

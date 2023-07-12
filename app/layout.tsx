@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ReactNode } from 'react';
 import { getUserBySessionToken } from '../database/users';
 import { LogoutButton } from './(auth)/logout/LogoutButton';
+import styles from './layout.module.scss';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -29,7 +30,7 @@ export default async function RootLayout({ children }: Props) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div>
+        <div className={styles.backgroundcolor}>
           {user ? (
             <div>
               <div>
@@ -42,9 +43,9 @@ export default async function RootLayout({ children }: Props) {
             </div>
           ) : (
             <div>
-              <Link href="/login">Log in</Link>
+              {/* <Link href="/login">Log in</Link>
               <br />
-              <Link href="/signup">Sign up</Link>
+              <Link href="/signup">Sign up</Link> */}
             </div>
           )}
         </div>

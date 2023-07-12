@@ -4,6 +4,9 @@ const nextConfig = {
     typedRoutes: true,
     serverActions: true,
   },
+  images: {
+    domains: ['res.cloudinary.com'],
+  },
 };
 
 module.exports = nextConfig;

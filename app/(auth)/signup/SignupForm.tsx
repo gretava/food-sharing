@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { SignupResponseBodyPost } from '../../api/(auth)/signup/route';
+import styles from './signupForm.module.scss';
 
 export default function SignupForm() {
   const [firstname, setFirstname] = useState('');
@@ -32,37 +33,53 @@ export default function SignupForm() {
   }
 
   return (
-    <form onSubmit={(event) => event.preventDefault()}>
-      <label>
-        First name:
-        <input
-          value={firstname}
-          onChange={(event) => setFirstname(event.currentTarget.value)}
-        />
-      </label>
-      <label>
-        Last name:
-        <input
-          value={lastname}
-          onChange={(event) => setLastname(event.currentTarget.value)}
-        />
-      </label>
-      <label>
-        Username:
-        <input
-          value={username}
-          onChange={(event) => setUsername(event.currentTarget.value)}
-        />
-      </label>
-      <label>
-        Password:
-        <input
-          value={password}
-          onChange={(event) => setPassword(event.currentTarget.value)}
-        />
-      </label>
-      <button onClick={async () => await signup()}>Sign up</button>
-      {error !== '' && <div>{error}</div>}
-    </form>
+    <main className={styles.backroundArea}>
+      <div className={styles.signupText}>
+        <h2 className={styles.h}>Create Account</h2>
+      </div>
+      <form onSubmit={(event) => event.preventDefault()}>
+        <div className={styles.signupArea}>
+          <label>
+            First name:
+            <input
+              className={styles.input}
+              value={firstname}
+              onChange={(event) => setFirstname(event.currentTarget.value)}
+            />
+          </label>
+          <label>
+            Last name:
+            <input
+              className={styles.input}
+              value={lastname}
+              onChange={(event) => setLastname(event.currentTarget.value)}
+            />
+          </label>
+          <label>
+            Username:
+            <input
+              className={styles.input}
+              value={username}
+              onChange={(event) => setUsername(event.currentTarget.value)}
+            />
+          </label>
+          <label>
+            Password:
+            <input
+              type="password"
+              className={styles.input}
+              value={password}
+              onChange={(event) => setPassword(event.currentTarget.value)}
+            />
+          </label>
+        </div>
+        <section className={styles.signupBtnForm}>
+          <button className={styles.btn} onClick={async () => await signup()}>
+            Signup
+          </button>
+          {error !== '' && <div>{error}</div>}
+        </section>
+      </form>
+    </main>
   );
 }

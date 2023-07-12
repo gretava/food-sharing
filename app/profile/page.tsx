@@ -1,7 +1,9 @@
 import { cookies } from 'next/headers';
+import Image from 'next/image';
 import { notFound, redirect } from 'next/navigation';
 import { getValidSessionByToken } from '../../database/sessions';
 import { getUserBySessionToken } from '../../database/users';
+import styles from './page.module.scss';
 import ProfileForm from './ProfileForm';
 
 type Props = {
@@ -31,18 +33,12 @@ export default async function UserProfilePage({ params }: Props) {
   if (!user) {
     notFound();
   }
+  // console.log(user);
+  console.log('this', user);
 
   return (
     <main>
-      {/* <div>id: {user.id}</div> */}
-      {/* <h3>
-        {user.firstname} {user.lastname}
-      </h3>
-      <div>username: {user.username}</div> */}
-      <br />
       <ProfileForm user={user} />
-      <br />
-      <div>Description</div>
     </main>
   );
 }

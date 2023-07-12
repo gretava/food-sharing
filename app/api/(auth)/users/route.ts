@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
-import { z } from 'zod';
+// import { z } from 'zod';
 import { getValidSessionByToken } from '../../../../database/sessions';
 import { getUsersWithLimitAndOffsetBySessionToken } from '../../../../database/users';
 
@@ -18,11 +18,11 @@ export type Error = {
 
 type UsersResponseBodyGet = { users: User[] } | Error;
 
-const userSchema = z.object({
-  firstname: z.string(),
-  lastname: z.string(),
-  username: z.string(),
-});
+// const userSchema = z.object({
+//   firstname: z.string(),
+//   lastname: z.string(),
+//   username: z.string(),
+// });
 
 export async function GET(
   request: NextRequest,

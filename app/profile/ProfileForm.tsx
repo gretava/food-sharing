@@ -1,20 +1,20 @@
 'use client';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { User } from '../../migrations/1687188335-createUsersTable';
+import styles from './profileForm.module.scss';
 
 type Props = {
-  user: {
-    id: number;
-    firstname: string;
-    lastname: string;
-    username: string;
-  };
+  user: User;
 };
 
 export default function ProfileForm({ user }: Props) {
   const [firstnameInput, setFirstnameInput] = useState(user.firstname);
   const [lastnameInput, setLastnameInput] = useState(user.lastname);
   const [usernameInput, setUsernameInput] = useState(user.username);
+  const [descriptionInput, setDescriptionInput] = useState(user.bio);
+  const [profileImageUrl, setProfileImageUrl] = useState(user.profileImgUrl);
   const [onEditId, setOnEditId] = useState<number>();
   const router = useRouter();
 
@@ -22,6 +22,8 @@ export default function ProfileForm({ user }: Props) {
   const [onEditFirstnameInput, setOnEditFirstnameInput] = useState('');
   const [onEditLastnameInput, setOnEditLastnameInput] = useState('');
   const [onEditUsernameInput, setOnEditUsernameInput] = useState('');
+  const [onEditDescriptionInput, setOnEditDescriptionInput] = useState('');
+  const [onEditProfileImageUrl, setOnEditProfileImageUrl] = useState('');
 
   async function updateUserById(id: number) {
     const response = await fetch(`/api/users/${id}`, {
@@ -30,71 +32,147 @@ export default function ProfileForm({ user }: Props) {
         firstname: onEditFirstnameInput,
         lastname: onEditLastnameInput,
         username: onEditUsernameInput,
+        bio: onEditDescriptionInput,
+        profileImgUrl: profileImageUrl,
       }),
     });
+
     router.refresh();
     const data = await response.json();
 
-    console.log(data.user);
+    console.log('here', data.user);
+
     setFirstnameInput(data.user.firstname);
     setLastnameInput(data.user.lastname);
     setUsernameInput(data.user.username);
+    setDescriptionInput(data.user.bio);
+    setProfileImageUrl(data.user.profileImgUrl);
   }
 
-  return (
-    <form onSubmit={(event) => event.preventDefault()}>
-      <label>
-        First Name
-        <input
-          value={user.id !== onEditId ? firstnameInput : onEditFirstnameInput}
-          onChange={(event) =>
-            setOnEditFirstnameInput(event.currentTarget.value)
-          }
-          disabled={user.id !== onEditId}
-        />
-      </label>
-      <label>
-        Last Name
-        <input
-          value={user.id !== onEditId ? lastnameInput : onEditLastnameInput}
-          onChange={(event) =>
-            setOnEditLastnameInput(event.currentTarget.value)
-          }
-          disabled={user.id !== onEditId}
-        />
-      </label>
-      <label>
-        Username
-        <input
-          value={user.id !== onEditId ? usernameInput : onEditUsernameInput}
-          onChange={(event) =>
-            setOnEditUsernameInput(event.currentTarget.value)
-          }
-          disabled={user.id !== onEditId}
-        />
-      </label>
+  const handleImageUpload = async (event: any) => {
+    const files = event.currentTarget.files;
+    const formData = new FormData();
+    formData.append('file', files[0]);
+    formData.append('upload_preset', 'vkncqije');
+    const res = await fetch(
+      `	https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDNAME}/upload`,
+      {
+        method: 'POST',
+        body: formData,
+      },
+    );
+    const file = await res.json();
 
-      {user.id === onEditId ? (
-        <button
-          onClick={async () => {
-            setOnEditId(undefined);
-            await updateUserById(user.id);
-          }}
-        >
-          save
-        </button>
-      ) : (
-        <button
-          onClick={() => {
-            setOnEditId(user.id);
-            setOnEditFirstnameInput(user.firstname);
-            setOnEditLastnameInput(user.lastname);
-            setOnEditUsernameInput(user.username);
-          }}
-        >
-          edit
-        </button>
-      )}
-    </form>
+    setProfileImageUrl(file.secure_url);
+  };
+
+  return (
+    <main className={styles.mainProfileArea}>
+      <h4 className={styles.h}>Profile</h4>
+      <div>
+        {!user.profileImgUrl ? null : (
+          <Image src={user.profileImgUrl} alt="" width={200} height={200} />
+        )}
+      </div>
+      <section>
+        <form onSubmit={(event) => event.preventDefault()}>
+          <div>
+            <input
+              id="file"
+              type="file"
+              // value={profileImageUrl} // I dont think this is correct
+              placeholder="Upload an image"
+              onChange={handleImageUpload}
+            />
+          </div>
+          <div className={styles.userInfoSection}>
+            <label>
+              First Name
+              <input
+                className={styles.input}
+                value={
+                  user.id !== onEditId ? firstnameInput : onEditFirstnameInput
+                }
+                onChange={(event) =>
+                  setOnEditFirstnameInput(event.currentTarget.value)
+                }
+                disabled={user.id !== onEditId}
+              />
+            </label>
+            <br />
+            <label>
+              Last Name
+              <input
+                className={styles.input}
+                value={
+                  user.id !== onEditId ? lastnameInput : onEditLastnameInput
+                }
+                onChange={(event) =>
+                  setOnEditLastnameInput(event.currentTarget.value)
+                }
+                disabled={user.id !== onEditId}
+              />
+            </label>
+            <br />
+            <label>
+              Username
+              <input
+                className={styles.input}
+                value={
+                  user.id !== onEditId ? usernameInput : onEditUsernameInput
+                }
+                onChange={(event) =>
+                  setOnEditUsernameInput(event.currentTarget.value)
+                }
+                disabled={user.id !== onEditId}
+              />
+            </label>
+            <br />
+            <label>
+              About Me
+              <textarea
+                className={styles.input}
+                value={
+                  user.id !== onEditId
+                    ? descriptionInput
+                    : onEditDescriptionInput
+                }
+                onChange={(event) =>
+                  setOnEditDescriptionInput(event.currentTarget.value)
+                }
+                disabled={user.id !== onEditId}
+              />
+            </label>
+          </div>
+          <div className={styles.editBtnForm}>
+            {user.id === onEditId ? (
+              <button
+                className={styles.btn}
+                onClick={async () => {
+                  setOnEditId(undefined);
+                  await updateUserById(user.id);
+                }}
+              >
+                save
+              </button>
+            ) : (
+              <button
+                className={styles.btn}
+                onClick={() => {
+                  setOnEditId(user.id);
+                  setOnEditFirstnameInput(user.firstname);
+                  setOnEditLastnameInput(user.lastname);
+                  setOnEditUsernameInput(user.username);
+                  setOnEditDescriptionInput(user.bio);
+                  // setOnEditProfileImageUrl(user.profileImgUrl);
+                }}
+              >
+                edit
+              </button>
+            )}
+          </div>
+        </form>
+      </section>
+    </main>
   );
 }

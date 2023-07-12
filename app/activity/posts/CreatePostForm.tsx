@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { Post } from '../../../migrations/1688030244-createTablePosts';
 
 type Props = {
@@ -15,7 +15,7 @@ export default function CreatePostForm({ userId, posts }: Props) {
   const [postContent, setPostContent] = useState('');
   const [imageInPostUrl, setImageInPostUrl] = useState<string>('');
 
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  // const fileInputRef = useRef<HTMLInputElement | null>(null);
   const router = useRouter();
 
   // change image

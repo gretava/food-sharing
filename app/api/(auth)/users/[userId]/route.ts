@@ -15,6 +15,8 @@ const userSchema = z.object({
   firstname: z.string(),
   lastname: z.string(),
   username: z.string(),
+  bio: z.string().optional(),
+  profileImgUrl: z.string().optional(),
 });
 
 export async function GET(
@@ -110,6 +112,8 @@ export async function PUT(
     result.data.firstname,
     result.data.lastname,
     result.data.username,
+    result.data.bio!,
+    result.data.profileImgUrl!,
   );
 
   if (!user) {

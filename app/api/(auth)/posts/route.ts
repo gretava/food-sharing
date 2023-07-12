@@ -33,6 +33,7 @@ const postSchema = z.object({
   // id: z.number(),
   userId: z.number(),
   content: z.string(),
+  imageUrl: z.string(),
   // createdAt: z.string(),
   // session: z.string(),
 });
@@ -135,6 +136,7 @@ export async function POST(
     // Number(result.data.userId),
     result.data.userId,
     result.data.content,
+    result.data.imageUrl,
     // result.data.createdAt,
     // session.id,
   );

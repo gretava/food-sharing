@@ -70,8 +70,9 @@ export async function POST(
     result.data.firstname,
     result.data.lastname,
     result.data.username,
+    // result.data.bio,
+    // result.data.profileImgUrl,
     passwordHash,
-    // result.data.profile_img_url,
   );
 
   if (!newUser) {

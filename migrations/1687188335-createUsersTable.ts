@@ -5,7 +5,8 @@ export type User = {
   firstname: string;
   lastname: string;
   username: string;
-  // profile_img_url: string;
+  bio?: string;
+  profileImgUrl?: string;
   // Omit passwordHash for security
 };
 
@@ -16,8 +17,9 @@ export async function up(sql: Sql) {
       firstname varchar(30) NOT NULL,
       lastname varchar(30) NOT NULL,
       username varchar(100) NOT NULL UNIQUE,
+      bio varchar(500),
+      profile_img_url varchar(250),
       password_hash varchar(100) NOT NULL
-      -- profile_img_url varchar(100)
     )
   `;
 }
