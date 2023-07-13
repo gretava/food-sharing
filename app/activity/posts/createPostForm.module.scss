@@ -1,0 +1,44 @@
+.postInputField {
+  text-align: center;
+  // margin: 0 20px;
+  padding: 20px;
+  border: solid 1px grey;
+  border-radius: 8px;
+}
+
+.textarea {
+  border-radius: 8px;
+  background-color: rgb(231, 229, 221);
+  margin: 10px;
+  border: none;
+  padding: 5px;
+
+  .upload {
+    justify-content: end;
+  }
+}
+
+.postBtnForm {
+  display: flex;
+  justify-content: end;
+  text-align: center;
+  padding-top: 10px;
+  width: 340px;
+  // margin-top: 0;
+  // margin-bottom: 30px;
+  // border-radius: 5px;
+  .btnPost {
+    padding: 8px 16px;
+    width: 80px;
+    text-align: center;
+    // margin-top: 10px;
+    margin: 0 30px;
+    border-radius: 50px;
+    border: none;
+    background-color: #d8a15a;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+  }
+}

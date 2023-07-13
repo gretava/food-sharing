@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Post } from '../../../migrations/1688030244-createTablePosts';
+import styles from './createPostForm.module.scss';
 
 type Props = {
   posts: Post[];
@@ -65,6 +66,7 @@ export default function CreatePostForm({ userId, posts }: Props) {
     // setPostList([...postList, data.post]);
 
     setPostContent('');
+    setImageInPostUrl('');
   }
 
   // async function deletePostById(id: number) {
@@ -79,21 +81,24 @@ export default function CreatePostForm({ userId, posts }: Props) {
 
   return (
     <form onSubmit={(event) => event.preventDefault()}>
-      <div>
-        <br />
+      <div className={styles.postInputField}>
         <textarea
+          className={styles.textarea}
+          rows={5}
+          cols={35}
           value={postContent}
           onChange={(event) => setPostContent(event.currentTarget.value)}
-          placeholder="Say something..."
+          placeholder="What's on the menu today?"
           required
         />
-
-        <input
-          id="file"
-          type="file"
-          placeholder="Upload an image"
-          onChange={handleImageUpload}
-        />
+        <div className={styles.upload}>
+          <input
+            id="file"
+            type="file"
+            placeholder="Upload an image"
+            onChange={handleImageUpload}
+          />
+        </div>
         {/* <div className="w-1/2 mx-auto"> */}
         {/* {loading ? (
                 <p>Loading...</p>
@@ -101,9 +106,15 @@ export default function CreatePostForm({ userId, posts }: Props) {
                 <img src={image} className="mt-4" alt="upload" />
               )} */}
         {/* </div> */}
-        <button onClick={async () => await createPost()}>Post</button>
+        <div className={styles.postBtnForm}>
+          <button
+            className={styles.btnPost}
+            onClick={async () => await createPost()}
+          >
+            Post
+          </button>
+        </div>
       </div>
-      {/* <pre>{JSON.stringify(imageInPostUrl, null, 2)}</pre> */}
     </form>
   );
 }

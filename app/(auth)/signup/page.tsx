@@ -1,5 +1,7 @@
 import { cookies } from 'next/headers';
+import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import { IoArrowBackOutline } from 'react-icons/io5';
 import { getValidSessionByToken } from '../../../database/sessions';
 import SignupForm from './SignupForm';
 

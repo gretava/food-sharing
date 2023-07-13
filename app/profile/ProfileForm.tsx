@@ -23,7 +23,7 @@ export default function ProfileForm({ user }: Props) {
   const [onEditLastnameInput, setOnEditLastnameInput] = useState('');
   const [onEditUsernameInput, setOnEditUsernameInput] = useState('');
   const [onEditDescriptionInput, setOnEditDescriptionInput] = useState('');
-  const [onEditProfileImageUrl, setOnEditProfileImageUrl] = useState('');
+  // const [onEditProfileImageUrl, setOnEditProfileImageUrl] = useState('');
 
   async function updateUserById(id: number) {
     const response = await fetch(`/api/users/${id}`, {
@@ -68,10 +68,18 @@ export default function ProfileForm({ user }: Props) {
 
   return (
     <main className={styles.mainProfileArea}>
-      <h4 className={styles.h}>Profile</h4>
       <div>
+        <h4 className={styles.h}>Profile</h4>
+      </div>
+      <div className={styles.profileImage}>
         {!user.profileImgUrl ? null : (
-          <Image src={user.profileImgUrl} alt="" width={200} height={200} />
+          <Image
+            className={styles.profileImage}
+            src={user.profileImgUrl}
+            alt="Profile image"
+            width={200}
+            height={200}
+          />
         )}
       </div>
       <section>
@@ -86,8 +94,8 @@ export default function ProfileForm({ user }: Props) {
             />
           </div>
           <div className={styles.userInfoSection}>
-            <label>
-              First Name
+            <label className={styles.label}>
+              First name
               <input
                 className={styles.input}
                 value={
@@ -100,8 +108,8 @@ export default function ProfileForm({ user }: Props) {
               />
             </label>
             <br />
-            <label>
-              Last Name
+            <label className={styles.label}>
+              Last name
               <input
                 className={styles.input}
                 value={
@@ -114,7 +122,7 @@ export default function ProfileForm({ user }: Props) {
               />
             </label>
             <br />
-            <label>
+            <label className={styles.label}>
               Username
               <input
                 className={styles.input}
@@ -128,9 +136,11 @@ export default function ProfileForm({ user }: Props) {
               />
             </label>
             <br />
-            <label>
-              About Me
+            <label className={styles.label}>
+              About me
               <textarea
+                rows={7}
+                // cols={40}
                 className={styles.input}
                 value={
                   user.id !== onEditId
@@ -147,7 +157,7 @@ export default function ProfileForm({ user }: Props) {
           <div className={styles.editBtnForm}>
             {user.id === onEditId ? (
               <button
-                className={styles.btn}
+                className={styles.btnSave}
                 onClick={async () => {
                   setOnEditId(undefined);
                   await updateUserById(user.id);
@@ -157,7 +167,7 @@ export default function ProfileForm({ user }: Props) {
               </button>
             ) : (
               <button
-                className={styles.btn}
+                className={styles.btnEdit}
                 onClick={() => {
                   setOnEditId(user.id);
                   setOnEditFirstnameInput(user.firstname);

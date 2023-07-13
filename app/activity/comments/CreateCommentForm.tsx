@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import styles from './createCommentForm.module.scss';
 
 type Props = {
   comments: Comment[];
@@ -32,13 +33,23 @@ export default function CreateCommentForm({ postId, userId, comments }: Props) {
 
   return (
     <form onSubmit={(event) => event.preventDefault()}>
-      <div>
+      <div className={styles.commentInputField}>
         <textarea
+          className={styles.textarea}
           value={commentContent}
           onChange={(event) => setCommentContent(event.currentTarget.value)}
-          placeholder="Reply"
+          placeholder="Reply..."
+          rows={2}
+          cols={20}
         />
-        <button onClick={async () => await createComment()}>Reply</button>
+        <div className={styles.replyBtnForm}>
+          <button
+            className={styles.btnReply}
+            onClick={async () => await createComment()}
+          >
+            Reply
+          </button>
+        </div>
       </div>
     </form>
   );

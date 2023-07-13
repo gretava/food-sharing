@@ -1,8 +1,10 @@
 'use client';
 
 import { Route } from 'next';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { IoArrowBackOutline } from 'react-icons/io5';
 import { getSafeReturnToPath } from '../../../util/validation';
 import { LoginResponseBodyPost } from '../../api/(auth)/login/route';
 import styles from './loginForm.module.scss';
@@ -40,6 +42,9 @@ export default function LoginForm(props: Props) {
 
   return (
     <main className={styles.backroundArea}>
+      <Link className={styles.backBtn} href="/">
+        <IoArrowBackOutline size="1.8rem" color=" rgb(231, 229, 221)" />
+      </Link>
       {/* <section className={styles.section}> */}
       <div className={styles.loginText}>
         <h2 className={styles.h}>Login</h2>
@@ -47,8 +52,8 @@ export default function LoginForm(props: Props) {
       </div>
       <form onSubmit={(event) => event.preventDefault()}>
         <div className={styles.loginArea}>
-          <label>
-            username
+          <label className={styles.label}>
+            Username
             <input
               className={styles.input}
               value={username}
@@ -56,8 +61,8 @@ export default function LoginForm(props: Props) {
             />
           </label>
           <br />
-          <label>
-            password
+          <label className={styles.label}>
+            Password
             <input
               className={styles.input}
               type="password"

@@ -48,32 +48,44 @@ export default async function ActivityPage() {
 
   return (
     <main className={styles.backgroundFeed}>
-      <h1>This is activity page</h1>
-      <h4>Post or comment here</h4>
+      <h4 className={styles.h4}>Feed</h4>
       <section>
-        <CreatePostForm userId={user.id} className={styles.postInputField} />
+        <CreatePostForm userId={user.id} />
 
         {/* display all posts with user info */}
         {userPostsWithInfo.map((post) => (
           <div key={`post-content-${post.postId}`}>
-            <div>{post.username}</div>
-            <div>{post.content}</div>
-            {post.imageUrl === '' ? null : (
-              <Image src={post.imageUrl} alt="" width={200} height={200} />
-            )}
-            <DeletePostButton postId={post.postId} />
+            <div className={styles.postWithInfo}>
+              <div className={styles.usernameInPost}>{post.username}</div>
+              <div className={styles.postContent}>{post.content}</div>
+              {post.imageUrl === '' ? null : (
+                <Image
+                  className={styles.uploadedImage}
+                  src={post.imageUrl}
+                  alt="Image from user"
+                  width={300}
+                  height={300}
+                />
+              )}
+              <div className={styles.commentsArea}>
+                {/* filter the comments based on postID and then map it over to display comments with user info */}
+                {commentsWithInfo
+                  .filter((comment) => comment.postId === post.postId)
+                  .map((comment) => (
+                    <li key={`comment-content-${comment.id}`}>
+                      <div className={styles.usernameInComment}>
+                        {comment.username}
+                      </div>
+                      <div className={styles.commentContent}>
+                        {comment.content}
+                      </div>
+                    </li>
+                  ))}
 
-            {/* filter the comments based on postID and then map it over to display comments with user info */}
-            {commentsWithInfo
-              .filter((comment) => comment.postId === post.postId)
-              .map((comment) => (
-                <li key={`comment-content-${comment.id}`}>
-                  <div>{comment.username}</div>
-                  <div>{comment.content} </div>
-                </li>
-              ))}
-
-            <CreateCommentForm postId={post.postId} userId={user.id} />
+                <CreateCommentForm postId={post.postId} userId={user.id} />
+              </div>
+              <DeletePostButton postId={post.postId} />
+            </div>
           </div>
         ))}
       </section>

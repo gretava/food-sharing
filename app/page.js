@@ -8,15 +8,15 @@ export default function Home() {
       <section className={styles.textArea}>
         <h1 className={styles.h1}>waste not</h1>
         <p className={styles.p}>
-          Space for like-minded individuals to contribute towards less food
-          waste and better tomorrow
+          Connecting like-minded individuals through food sharing to reduce food
+          waste.
         </p>
         <div className={styles.links}>
-          <Link className={styles.loginSignup} href="/login">
-            Log in
-          </Link>
-          <Link className={styles.loginSignup} type="button" href="/signup">
+          <Link className={styles.signupBtn} type="button" href="/signup">
             Sign up
+          </Link>
+          <Link className={styles.loginBtn} href="/login">
+            Log in
           </Link>
         </div>
       </section>

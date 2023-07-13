@@ -1,7 +1,9 @@
 'use client';
 
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { IoArrowBackOutline } from 'react-icons/io5';
 import { SignupResponseBodyPost } from '../../api/(auth)/signup/route';
 import styles from './signupForm.module.scss';
 
@@ -34,12 +36,17 @@ export default function SignupForm() {
 
   return (
     <main className={styles.backroundArea}>
+      {/* <div> */}
+      <Link className={styles.backBtn} href="/">
+        <IoArrowBackOutline size="1.8rem" color="rgb(231, 229, 221)" />
+      </Link>
+      {/* </div> */}
       <div className={styles.signupText}>
         <h2 className={styles.h}>Create Account</h2>
       </div>
       <form onSubmit={(event) => event.preventDefault()}>
         <div className={styles.signupArea}>
-          <label>
+          <label className={styles.label}>
             First name:
             <input
               className={styles.input}
@@ -47,7 +54,7 @@ export default function SignupForm() {
               onChange={(event) => setFirstname(event.currentTarget.value)}
             />
           </label>
-          <label>
+          <label className={styles.label}>
             Last name:
             <input
               className={styles.input}
@@ -55,7 +62,7 @@ export default function SignupForm() {
               onChange={(event) => setLastname(event.currentTarget.value)}
             />
           </label>
-          <label>
+          <label className={styles.label}>
             Username:
             <input
               className={styles.input}
@@ -63,7 +70,7 @@ export default function SignupForm() {
               onChange={(event) => setUsername(event.currentTarget.value)}
             />
           </label>
-          <label>
+          <label className={styles.label}>
             Password:
             <input
               type="password"

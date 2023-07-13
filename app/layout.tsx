@@ -1,13 +1,15 @@
 import './globals.scss';
-import { Inter } from 'next/font/google';
+import { Montserrat } from 'next/font/google';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { ReactNode } from 'react';
+import { CgProfile } from 'react-icons/cg';
+import { GrHomeRounded } from 'react-icons/gr';
 import { getUserBySessionToken } from '../database/users';
 import { LogoutButton } from './(auth)/logout/LogoutButton';
 import styles from './layout.module.scss';
 
-const inter = Inter({ subsets: ['latin'] });
+const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'Create Next App',
@@ -29,17 +31,25 @@ export default async function RootLayout({ children }: Props) {
 
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={montserrat.className}>
         <div className={styles.backgroundcolor}>
           {user ? (
-            <div>
+            <div className={styles.profileNavbar}>
               <div>
-                <Link href="/activity">Feed</Link>
+                <Link href="/activity">
+                  <GrHomeRounded size="1.65rem" />
+                </Link>
               </div>
-              {/* how to get firstname here? user.firstname */}
-              <span>Hello, </span>
-              <Link href="/profile">{user.firstname}</Link>
-              <LogoutButton />
+              <div>
+                {/* how to get firstname here? user.firstname */}
+                {/* <span className={styles.helloUsername}>Hello, </span> */}
+                <Link className={styles.helloUsername} href="/profile">
+                  <CgProfile size="1.8rem" color="#000" />
+                </Link>
+              </div>
+              <span>
+                <LogoutButton />
+              </span>
             </div>
           ) : (
             <div>

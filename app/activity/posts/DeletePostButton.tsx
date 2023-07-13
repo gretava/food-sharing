@@ -1,8 +1,9 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+// import { useState } from 'react';
 import { Post } from '../../../migrations/1688030244-createTablePosts';
+import styles from './deletePostButton.module.scss';
 
 type Props = {
   // posts: Post[];
@@ -25,5 +26,14 @@ export function DeletePostButton({ postId }: Props) {
     // setPostList(postList.filter((post) => post.id !== data.post.id));
   }
 
-  return <button onClick={async () => await deletePostById(postId)}>x</button>;
+  return (
+    <div className={styles.deleteBtnForm}>
+      <button
+        className={styles.btnDelete}
+        onClick={async () => await deletePostById(postId)}
+      >
+        Remove post
+      </button>
+    </div>
+  );
 }
