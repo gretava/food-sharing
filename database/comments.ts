@@ -65,6 +65,14 @@ export const deleteCommentById = cache(async (id: number) => {
   return comment;
 });
 
+// type PostsFromUsers = {
+//   commentId: number;
+//   commentContent: string;
+//   userId: number;
+//   username: string;
+//   // userImageUrl: string;
+// };
+
 export const getAllCommentsWithUserInfo = cache(async () => {
   const commentsWithUserInfo = await sql<commentsWithUserInfo[]>`
     SELECT

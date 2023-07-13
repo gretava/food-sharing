@@ -6,14 +6,13 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "migrate": "dotenv -- ley --require tsm",
+    "migrate": "ley --require tsm",
     "start": "next start"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
     "cloudinary": "^1.37.3",
-    "dotenv-cli": "^7.2.1",
-    "dotenv-safe": "^8.2.0",
+    "dotenv": "^16.3.1",
     "formidable": "^3.5.0",
     "ley": "^0.8.1",
     "next": "13.4.9",
@@ -29,10 +28,9 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
-    "@types/dotenv-safe": "^8.1.2",
     "@types/react": "^18.2.12",
     "@types/react-dom": "^18.2.5",
-    "eslint-config-upleveled": "^4.7.2",
+    "eslint-config-upleveled": "^5.0.0",
     "stylelint": "^15.8.0",
     "stylelint-config-upleveled": "^1.0.2",
     "typescript": "^5.1.3"
