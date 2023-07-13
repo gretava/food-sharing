@@ -9,7 +9,7 @@ export default function Home() {
         <h1 className={styles.h1}>waste not</h1>
         <p className={styles.p}>
           Connecting like-minded individuals through food sharing to reduce food
-          waste.
+          waste
         </p>
         <div className={styles.links}>
           <Link className={styles.signupBtn} type="button" href="/signup">
