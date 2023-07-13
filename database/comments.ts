@@ -2,6 +2,15 @@ import { cache } from 'react';
 import { Comment } from '../migrations/1688562116-createTableComments';
 import { sql } from './connect';
 
+type CommentsWithUserInfo = {
+  commentId: number;
+  postId: number;
+  content: string;
+  userId: number;
+  username: string;
+  // userImageUrl: string;
+};
+
 export const createComment = cache(
   async (postId: number, userId: number, content: string) => {
     const [comment] = await sql<Comment[]>`
@@ -65,16 +74,8 @@ export const deleteCommentById = cache(async (id: number) => {
   return comment;
 });
 
-// type PostsFromUsers = {
-//   commentId: number;
-//   commentContent: string;
-//   userId: number;
-//   username: string;
-//   // userImageUrl: string;
-// };
-
 export const getAllCommentsWithUserInfo = cache(async () => {
-  const commentsWithUserInfo = await sql<commentsWithUserInfo[]>`
+  const commentsWithUserInfo = await sql<CommentsWithUserInfo[]>`
     SELECT
       comments.id AS comment_id,
       comments.post_id AS post_id,

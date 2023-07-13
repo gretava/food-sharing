@@ -83,13 +83,15 @@ export const deletePostById = cache(async (id: number) => {
   return post;
 });
 
-// type PostsFromUsers = {
-//   commentId: number;
-//   commentContent: string;
-//   userId: number;
-//   username: string;
-//   // userImageUrl: string;
-// };
+type PostsFromUsers = {
+  postId: number;
+  userId: number;
+  username: string;
+  content: string;
+  imageUrl: string;
+  createdAt: Date;
+  // userImageUrl: string;
+};
 
 export const getAllPostsWithUserInfo = cache(async () => {
   const postsFromUser = await sql<PostsFromUsers[]>`
