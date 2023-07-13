@@ -90,12 +90,15 @@ export const getAllPostsWithUserInfo = cache(async () => {
     users.id AS user_id,
     users.username AS username,
     posts.content AS content,
-    posts.image_url AS image_url
+    posts.image_url AS image_url,
+    posts.created_at AS created_at
     -- users.image_url AS user_image_url
   FROM
     posts
   INNER JOIN
     users ON posts.user_id = users.id
+  ORDER BY
+      created_at DESC
   `;
   return postsFromUser;
 });

@@ -19,10 +19,14 @@ export default function ProfileForm({ user }: Props) {
   const router = useRouter();
 
   // only for on edit inputs
-  const [onEditFirstnameInput, setOnEditFirstnameInput] = useState('');
-  const [onEditLastnameInput, setOnEditLastnameInput] = useState('');
-  const [onEditUsernameInput, setOnEditUsernameInput] = useState('');
-  const [onEditDescriptionInput, setOnEditDescriptionInput] = useState('');
+  const [onEditFirstnameInput, setOnEditFirstnameInput] = useState(
+    user.firstname,
+  );
+  const [onEditLastnameInput, setOnEditLastnameInput] = useState(user.lastname);
+  const [onEditUsernameInput, setOnEditUsernameInput] = useState(user.username);
+  const [onEditDescriptionInput, setOnEditDescriptionInput] = useState(
+    user.bio,
+  );
   // const [onEditProfileImageUrl, setOnEditProfileImageUrl] = useState('');
 
   async function updateUserById(id: number) {

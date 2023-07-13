@@ -43,8 +43,9 @@ export default async function ActivityPage() {
   const userPostsWithInfo = await getAllPostsWithUserInfo();
   const commentsWithInfo = await getAllCommentsWithUserInfo();
   // const commentsByPostId = await getCommentsByPostId();
-  console.log(userPostsWithInfo);
-  console.log(commentsWithInfo);
+  // console.log(userPostsWithInfo);
+  // console.log(posts);
+  // console.log(commentsWithInfo);
 
   return (
     <main className={styles.backgroundFeed}>
