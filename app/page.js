@@ -6,7 +6,10 @@ export default function Home() {
   return (
     <main className={styles.backroundArea}>
       <section className={styles.textArea}>
-        <h1 className={styles.h1}>waste not</h1>
+        <h1 className={styles.h1}>
+          waste <br />
+          not
+        </h1>
         <p className={styles.p}>
           Connecting like-minded individuals through food sharing to reduce food
           waste
