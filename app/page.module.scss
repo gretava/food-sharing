@@ -117,34 +117,47 @@
     height: 100%;
     overflow: auto;
   }
+  // .textArea {
+  //   transform: scale(0.9, 0.9);
+  // }
+
+  .h1,
+  .p,
+  .signupBtn,
+  .loginBtn {
+    transform: scale(0.8);
+  }
 
   .textArea {
     align-items: center;
-    display: block;
+    // display: block;
     margin: 0 auto;
     width: 100%;
     text-align: start;
     padding: 30px;
 
-    .h1 {
-      font-size: 4.5rem;
-      letter-spacing: 0.15rem;
-      line-height: 4.2rem;
-    }
+    //   .h1 {
+    //     font-size: 4.5rem;
+    //     letter-spacing: 0.15rem;
+    //     line-height: 4.2rem;
+    //   }
 
-    .p {
-      font-size: 1rem;
-      line-height: 1.6rem;
-    }
+    //   .p {
+    //     font-size: 1rem;
+    //     line-height: 1.6rem;
+    //   }
 
     .signupBtn {
-      font-size: 0.9rem;
+      font-size: 1rem;
       padding: 8px 16px;
+      // transform: scale(0.8, 0.8);
     }
 
     .loginBtn {
-      font-size: 0.9rem;
+      font-size: 1rem;
       padding: 8px 16px;
+      // transform: scale(0.8, 0.8);
+      // margin-left: 0;
     }
   }
 }

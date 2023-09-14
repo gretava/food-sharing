@@ -65,7 +65,7 @@
 
 .signupBtnForm {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   text-align: center;
   padding: 10px 0;
   margin-top: 10px;
@@ -91,4 +91,13 @@
   display: flex;
   margin-bottom: 0;
   margin-top: auto;
+}
+
+@media (max-width: 410px) {
+  .signupArea,
+  .h,
+  .signupBtnForm,
+  .backBtn {
+    transform: scale(0.8, 0.8);
+  }
 }
