@@ -1,6 +1,6 @@
 .backgroundFeed {
-  // display: flex;
   min-height: 100vh;
+  width: 100vw;
   background: #255845;
   margin-bottom: 20px;
   padding: 20px;
@@ -79,5 +79,12 @@
     color: #40403f;
     //   border: solid 1px grey;
     //   border-radius: 50px;
+  }
+}
+
+@media (min-width: 413px) {
+  .postWithInfo {
+    width: 412px;
+    margin: auto;
   }
 }

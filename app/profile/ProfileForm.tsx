@@ -88,15 +88,15 @@ export default function ProfileForm({ user }: Props) {
       </div>
       <section>
         <form onSubmit={(event) => event.preventDefault()}>
-          <div>
-            <input
-              id="file"
-              type="file"
-              // value={profileImageUrl} // I dont think this is correct
-              placeholder="Upload an image"
-              onChange={handleImageUpload}
-            />
-          </div>
+          {/* <div> */}
+          <input
+            id="file"
+            type="file"
+            // value={profileImageUrl} // I dont think this is correct
+            // placeholder="Upload an image"
+            onChange={handleImageUpload}
+          />
+          {/* </div> */}
           <div className={styles.userInfoSection}>
             <label className={styles.label}>
               First name

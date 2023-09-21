@@ -50,7 +50,7 @@ export default async function ActivityPage() {
   return (
     <main className={styles.backgroundFeed}>
       <h4 className={styles.h4}>Feed</h4>
-      <section>
+      <section className={styles.section}>
         <CreatePostForm userId={user.id} />
 
         {/* display all posts with user info */}
