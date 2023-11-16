@@ -1,9 +1,9 @@
 import { cookies } from 'next/headers';
-import Image from 'next/image';
+// import Image from 'next/image';
 import { notFound, redirect } from 'next/navigation';
 import { getValidSessionByToken } from '../../database/sessions';
 import { getUserBySessionToken } from '../../database/users';
-import styles from './page.module.scss';
+// import styles from './page.module.scss';
 import ProfileForm from './ProfileForm';
 
 type Props = {

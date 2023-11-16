@@ -81,22 +81,22 @@ export default function ProfileForm({ user }: Props) {
             className={styles.profileImage}
             src={user.profileImgUrl}
             alt="Profile image"
-            width={200}
-            height={200}
+            width={180}
+            height={180}
           />
         )}
       </div>
       <section>
         <form onSubmit={(event) => event.preventDefault()}>
-          {/* <div> */}
-          <input
-            id="file"
-            type="file"
-            // value={profileImageUrl} // I dont think this is correct
-            // placeholder="Upload an image"
-            onChange={handleImageUpload}
-          />
-          {/* </div> */}
+          <div className={styles.profilePicDiv}>
+            <input
+              id="file"
+              type="file"
+              name="file"
+              onChange={handleImageUpload}
+              className={styles.profilePicInput}
+            />
+          </div>
           <div className={styles.userInfoSection}>
             <label className={styles.label}>
               First name
