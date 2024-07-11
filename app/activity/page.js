@@ -50,12 +50,12 @@ export default async function ActivityPage() {
   return (
     <main className={styles.backgroundFeed}>
       <h4 className={styles.h4}>Feed</h4>
-      <section className={styles.section}>
+      <section>
         <CreatePostForm userId={user.id} />
 
         {/* display all posts with user info */}
         {userPostsWithInfo.map((post) => (
-          <div key={`post-content-${post.postId}`}>
+          <div className={styles.section} key={`post-content-${post.postId}`}>
             <div className={styles.postWithInfo}>
               <div className={styles.usernameInPost}>{post.username}</div>
               <div className={styles.postContent}>{post.content}</div>

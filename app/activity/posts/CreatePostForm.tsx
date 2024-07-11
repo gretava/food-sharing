@@ -80,22 +80,25 @@ export default function CreatePostForm({ userId, posts }: Props) {
   // }
 
   return (
-    <form onSubmit={(event) => event.preventDefault()}>
+    <form
+      className={styles.formArea}
+      onSubmit={(event) => event.preventDefault()}
+    >
       <div className={styles.postInputField}>
         <textarea
           className={styles.textarea}
-          rows={5}
-          cols={35}
+          rows={6}
+          // cols={35}
           value={postContent}
           onChange={(event) => setPostContent(event.currentTarget.value)}
           placeholder="What's on the menu today?"
           required
         />
-        <div className={styles.upload}>
+        <div className={styles.fileUpload}>
           <input
+            className={styles.upload}
             id="file"
             type="file"
-            placeholder="Upload an image"
             onChange={handleImageUpload}
           />
         </div>
