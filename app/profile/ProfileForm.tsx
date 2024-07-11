@@ -72,9 +72,9 @@ export default function ProfileForm({ user }: Props) {
 
   return (
     <main className={styles.mainProfileArea}>
-      <div>
-        <h4 className={styles.h}>Profile</h4>
-      </div>
+      {/* <div> */}
+      <h4 className={styles.h}>Profile</h4>
+      {/* </div> */}
       <div className={styles.profileImage}>
         {!user.profileImgUrl ? null : (
           <Image
