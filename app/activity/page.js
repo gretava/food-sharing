@@ -85,7 +85,9 @@ export default async function ActivityPage() {
 
                 <CreateCommentForm postId={post.postId} userId={user.id} />
               </div>
-              <DeletePostButton postId={post.postId} />
+              {post.userId === user.id && (
+                <DeletePostButton postId={post.postId} />
+              )}
             </div>
           </div>
         ))}
