@@ -174,10 +174,10 @@ export default function ProfileForm({ user }: Props) {
                 className={styles.btnEdit}
                 onClick={() => {
                   setOnEditId(user.id);
-                  setOnEditFirstnameInput(user.firstname);
-                  setOnEditLastnameInput(user.lastname);
-                  setOnEditUsernameInput(user.username);
-                  setOnEditDescriptionInput(user.bio);
+                  // setOnEditFirstnameInput(user.firstname);
+                  // setOnEditLastnameInput(user.lastname);
+                  // setOnEditUsernameInput(user.username);
+                  // setOnEditDescriptionInput(user.bio);
                   // setOnEditProfileImageUrl(user.profileImgUrl);
                 }}
               >
