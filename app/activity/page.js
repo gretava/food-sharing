@@ -49,48 +49,50 @@ export default async function ActivityPage() {
 
   return (
     <main className={styles.backgroundFeed}>
-      <h4 className={styles.h4}>Feed</h4>
       <section className={styles.section}>
-        <CreatePostForm userId={user.id} />
+        <h4 className={styles.h4}>Feed</h4>
+        <div className={styles.activityFeed}>
+          <CreatePostForm userId={user.id} />
 
-        {/* display all posts with user info */}
-        {userPostsWithInfo.map((post) => (
-          <div key={`post-content-${post.postId}`}>
-            <div className={styles.postWithInfo}>
-              <div className={styles.usernameInPost}>{post.username}</div>
-              <div className={styles.postContent}>{post.content}</div>
-              {post.imageUrl === '' ? null : (
-                <Image
-                  className={styles.uploadedImage}
-                  src={post.imageUrl}
-                  alt="Image from user"
-                  width={300}
-                  height={300}
-                />
-              )}
-              <div className={styles.commentsArea}>
-                {/* filter the comments based on postID and then map it over to display comments with user info */}
-                {commentsWithInfo
-                  .filter((comment) => comment.postId === post.postId)
-                  .map((comment) => (
-                    <li key={`comment-content-${comment.id}`}>
-                      <div className={styles.usernameInComment}>
-                        {comment.username}
-                      </div>
-                      <div className={styles.commentContent}>
-                        {comment.content}
-                      </div>
-                    </li>
-                  ))}
+          {/* display all posts with user info */}
+          {userPostsWithInfo.map((post) => (
+            <div key={`post-content-${post.postId}`}>
+              <div className={styles.postWithInfo}>
+                <div className={styles.usernameInPost}>{post.username}</div>
+                <div className={styles.postContent}>{post.content}</div>
+                {post.imageUrl === '' ? null : (
+                  <Image
+                    className={styles.uploadedImage}
+                    src={post.imageUrl}
+                    alt="Image from user"
+                    width={300}
+                    height={300}
+                  />
+                )}
+                <div className={styles.commentsArea}>
+                  {/* filter the comments based on postID and then map it over to display comments with user info */}
+                  {commentsWithInfo
+                    .filter((comment) => comment.postId === post.postId)
+                    .map((comment) => (
+                      <li key={`comment-content-${comment.id}`}>
+                        <div className={styles.usernameInComment}>
+                          {comment.username}
+                        </div>
+                        <div className={styles.commentContent}>
+                          {comment.content}
+                        </div>
+                      </li>
+                    ))}
 
-                <CreateCommentForm postId={post.postId} userId={user.id} />
+                  <CreateCommentForm postId={post.postId} userId={user.id} />
+                </div>
+                {post.userId === user.id && (
+                  <DeletePostButton postId={post.postId} />
+                )}
               </div>
-              {post.userId === user.id && (
-                <DeletePostButton postId={post.postId} />
-              )}
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </section>
     </main>
   );

@@ -60,10 +60,12 @@
   .profilePicInput::file-selector-button {
     border: none;
     height: 100%;
-    width: 40%;
+    width: 30%;
     cursor: pointer;
     font-family: var(--body-font);
     border-radius: 8px;
+    background-color: rgb(231, 229, 221);
+
     // margin-left: 4%;
   }
 }

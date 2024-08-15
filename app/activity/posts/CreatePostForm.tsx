@@ -95,6 +95,8 @@ export default function CreatePostForm({ userId, posts }: Props) {
           <input
             id="file"
             type="file"
+            name="file"
+            className={styles.postImgInput}
             placeholder="Upload an image"
             onChange={handleImageUpload}
           />

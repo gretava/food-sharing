@@ -32,7 +32,7 @@ export function DeletePostButton({ postId }: Props) {
         className={styles.btnDelete}
         onClick={async () => await deletePostById(postId)}
       >
-        Remove post
+        Delete
       </button>
     </div>
   );

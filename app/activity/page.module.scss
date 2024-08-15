@@ -1,27 +1,39 @@
 .backgroundFeed {
-  min-height: 100vh;
-  width: 100vw;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.section {
   background: #255845;
   margin-bottom: 20px;
-  padding: 20px;
+  display: grid;
+  justify-content: center;
+  // padding: 20px;
+}
+
+.activityFeed {
+  display: grid;
+  justify-content: center;
+  // max-width: 50%;
 }
 
 .h4 {
   text-align: center;
   font-size: 2.2rem;
   line-height: 2rem;
-  padding: 0 10px;
+  padding: 0.8rem;
   // margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 0.8rem;
   color: #d8a15a;
 }
 
 .postWithInfo {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
   text-align: start;
   // margin: 0 20px;
-  padding: 10px;
+  padding: 0.8rem;
   // border-top: solid 1px grey;
   border: solid 1px #255845;
   border-radius: 8px;
@@ -54,15 +66,14 @@
 .commentsArea {
   margin-top: 10px;
   margin-bottom: 20px;
-  // margin-left: 40px;
   text-align: start;
-  // margin: 0 20px;
-  // padding-left: 30px;
+  margin-left: 0.8rem;
   list-style-type: none;
   overflow-wrap: break-word;
 
   .usernameInComment {
     font-weight: 550;
+    // margin-left: 0.8rem;
     padding-bottom: 3px;
     // border-bottom: solid 1px grey;
     // width: 300px;
@@ -72,8 +83,6 @@
   }
 
   .commentContent {
-    // margin-left: 5px;
-    // padding-top: 5px;
     padding-bottom: 10px;
     text-align: start;
     color: #40403f;
@@ -82,9 +91,9 @@
   }
 }
 
-@media (min-width: 413px) {
-  .postWithInfo {
-    width: 412px;
-    margin: auto;
-  }
-}
+// @media (min-width: 413px) {
+//   .postWithInfo {
+//     width: 412px;
+//     margin: auto;
+//   }
+// }
