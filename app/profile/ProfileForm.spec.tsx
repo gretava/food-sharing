@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import ProfileForm, { ProfileFormProps } from './ProfileForm';
 
 jest.mock('next/navigation', () => ({
@@ -19,8 +19,11 @@ describe('ProfileForm', () => {
       },
     };
     render(<ProfileForm {...defaultProps} />);
+
+    // this is very convenient for testing:
+    // more info: https://testing-library.com/docs/dom-testing-library/api-debugging/#screenlogtestingplaygroundurl
     screen.logTestingPlaygroundURL();
-    expect(1 + 1).toBe(2);
+
     // todo: the rest of test
   });
 });
