@@ -9,6 +9,8 @@ type Props = {
   user: User;
 };
 
+// dummy commit
+
 export default function ProfileForm({ user }: Props) {
   const [firstnameInput, setFirstnameInput] = useState(user.firstname);
   const [lastnameInput, setLastnameInput] = useState(user.lastname);
