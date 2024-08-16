@@ -5,11 +5,11 @@ import { useState } from 'react';
 import { User } from '../../migrations/1687188335-createUsersTable';
 import styles from './profileForm.module.scss';
 
-type Props = {
+export type ProfileFormProps = {
   user: User;
 };
 
-export default function ProfileForm({ user }: Props) {
+export default function ProfileForm({ user }: ProfileFormProps) {
   const [firstnameInput, setFirstnameInput] = useState(user.firstname);
   const [lastnameInput, setLastnameInput] = useState(user.lastname);
   const [usernameInput, setUsernameInput] = useState(user.username);
