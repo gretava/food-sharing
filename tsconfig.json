@@ -1,13 +1,27 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "eslint-config-upleveled/tsconfig.base.json",
   "compilerOptions": {
     "plugins": [
       {
         "name": "next"
       }
     ],
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "noEmit": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true
   },
   "include": [
     "**/.eslintrc.cjs",
@@ -18,5 +32,8 @@
     "**/*.cjs",
     "**/*.mjs",
     ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }
