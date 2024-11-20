@@ -1,14 +1,22 @@
 .mainProfileArea {
   margin: 0;
   // max-width: 100%;
-  width: 100vw;
-  min-height: 100vh;
+  // width: 100vw;
+  // min-height: 100vh;
   // padding: 10px;
   background: #255845;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: center;
+  // align-items: center;
+}
+
+.profileSection {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  align-content: center;
 }
 
 .userInfoSection {
@@ -27,46 +35,39 @@
   letter-spacing: 0.15rem;
   font-family: var(--title-font);
   font-size: 2.2rem;
-  line-height: 2rem;
-  padding: 0 20px;
-  margin-top: 4%; //10px
-  margin-bottom: 6%; //20px
+  padding-top: 1rem;
+  // margin: 1rem; //10px
+  // margin-bottom: 6%; //20px
   position: static;
+}
+
+.imageSection {
+  display: flex;
+  flex-direction: column;
 }
 
 .profileImage {
   width: 100%;
-  max-width: 180px; /* Set a maximum width for the image */
-  text-align: center;
+  max-width: 180px;
   border-radius: 50%;
   object-fit: cover;
+  margin: 0 auto;
 }
 
 .profilePicDiv {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  // padding: 0 4%;
+  width: 200px;
 
   .profilePicInput[type='file'] {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 0px;
+    gap: 2rem;
     font-family: var(--body-font);
   }
 
   .profilePicInput::file-selector-button {
     border: none;
-    height: 100%;
-    width: 30%;
-    cursor: pointer;
     font-family: var(--body-font);
     border-radius: 8px;
     background-color: rgb(231, 229, 221);
-
-    // margin-left: 4%;
+    cursor: pointer;
   }
 }
 

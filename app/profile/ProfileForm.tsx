@@ -73,30 +73,44 @@ export default function ProfileForm({ user }: Props) {
   return (
     <main className={styles.mainProfileArea}>
       <div>
-        <h4 className={styles.h}>Profile</h4>
+        <h4 className={styles.h}>Hello, {user.firstname}</h4>
       </div>
-      <div className={styles.profileImage}>
-        {!user.profileImgUrl ? null : (
-          <Image
-            className={styles.profileImage}
-            src={user.profileImgUrl}
-            alt="Profile image"
-            width={180}
-            height={180}
-          />
-        )}
-      </div>
-      <section>
+
+      <section className={styles.profileSection}>
         <form onSubmit={(event) => event.preventDefault()}>
-          <div className={styles.profilePicDiv}>
-            <input
-              id="file"
-              type="file"
-              name="file"
-              onChange={handleImageUpload}
-              className={styles.profilePicInput}
-            />
+          <div className={styles.imageSection}>
+            <div className={styles.profileImage}>
+              {user.profileImgUrl ? (
+                <Image
+                  className={styles.profileImage}
+                  src={user.profileImgUrl}
+                  alt="Profile image"
+                  width={180}
+                  height={180}
+                  priority
+                />
+              ) : (
+                <Image
+                  className={styles.profileImage}
+                  src="/images/default_user_image.png"
+                  alt="avatar"
+                  width={180}
+                  height={180}
+                  priority
+                />
+              )}
+            </div>
+            <div className={styles.profilePicDiv}>
+              <input
+                id="file"
+                type="file"
+                name="file"
+                onChange={handleImageUpload}
+                className={styles.profilePicInput}
+              />
+            </div>
           </div>
+
           <div className={styles.userInfoSection}>
             <label className={styles.label}>
               First name
