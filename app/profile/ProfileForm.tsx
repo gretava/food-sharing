@@ -100,15 +100,17 @@ export default function ProfileForm({ user }: Props) {
                 />
               )}
             </div>
-            <div className={styles.profilePicDiv}>
-              <input
-                id="file"
-                type="file"
-                name="file"
-                onChange={handleImageUpload}
-                className={styles.profilePicInput}
-              />
-            </div>
+            {user.id === onEditId && (
+              <div className={styles.profilePicDiv}>
+                <input
+                  id="file"
+                  type="file"
+                  name="file"
+                  onChange={handleImageUpload}
+                  className={styles.profilePicInput}
+                />
+              </div>
+            )}
           </div>
 
           <div className={styles.userInfoSection}>
