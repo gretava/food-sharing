@@ -15,7 +15,7 @@ export default function ProfileForm({ user }: Props) {
   const [usernameInput, setUsernameInput] = useState(user.username);
   const [descriptionInput, setDescriptionInput] = useState(user.bio);
   const [profileImageUrl, setProfileImageUrl] = useState(user.profileImgUrl);
-  const [onEditId, setOnEditId] = useState<number>();
+  const [onEditId, setOnEditId] = useState<number | undefined>(undefined);
   const router = useRouter();
 
   // only for on edit inputs
@@ -33,18 +33,18 @@ export default function ProfileForm({ user }: Props) {
     const response = await fetch(`/api/users/${id}`, {
       method: 'PUT',
       body: JSON.stringify({
-        firstname: onEditFirstnameInput,
-        lastname: onEditLastnameInput,
-        username: onEditUsernameInput,
-        bio: onEditDescriptionInput,
-        profileImgUrl: profileImageUrl,
+        firstname: onEditFirstnameInput || '',
+        lastname: onEditLastnameInput || '',
+        username: onEditUsernameInput || '',
+        bio: onEditDescriptionInput || '',
+        profileImgUrl: profileImageUrl || '',
       }),
     });
 
     router.refresh();
     const data = await response.json();
 
-    console.log('here', data.user);
+    console.log('here', data);
 
     setFirstnameInput(data.user.firstname);
     setLastnameInput(data.user.lastname);
@@ -174,11 +174,6 @@ export default function ProfileForm({ user }: Props) {
                 className={styles.btnEdit}
                 onClick={() => {
                   setOnEditId(user.id);
-                  // setOnEditFirstnameInput(user.firstname);
-                  // setOnEditLastnameInput(user.lastname);
-                  // setOnEditUsernameInput(user.username);
-                  // setOnEditDescriptionInput(user.bio);
-                  // setOnEditProfileImageUrl(user.profileImgUrl);
                 }}
               >
                 edit
